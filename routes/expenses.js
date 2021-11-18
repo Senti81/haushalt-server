@@ -30,7 +30,7 @@ router.get('/expenses/:id', auth, async (req, res, next) => {
 //     expensesByUser.length > 0 ? res.json(expensesByUser) : next();
 // });
 
-router.post('/expenses', async (req, res) => {
+router.post('/expenses', auth, async (req, res) => {
     const expense = new Expense(req.body)
     try {
         await expense.save()
@@ -45,7 +45,7 @@ router.post('/expenses', async (req, res) => {
     // res.json(await getById(newId).first());
 });
 
-router.put('/expenses/:id', async (req, res, next) => {
+router.put('/expenses/:id', auth, async (req, res, next) => {
     const updates = Object.keys(req.body)
 
     try {
@@ -63,7 +63,7 @@ router.put('/expenses/:id', async (req, res, next) => {
     // updatedExpense === 1 ? res.json(await getById(req.params.id).first()) : next();
 });
 
-router.delete('/expenses/:id', async (req, res, next) => {
+router.delete('/expenses/:id', auth, async (req, res, next) => {
     try {
         const result = await Expense.findByIdAndDelete(req.params.id)
         if(!result)
