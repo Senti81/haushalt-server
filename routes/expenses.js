@@ -21,14 +21,8 @@ router.get('/expenses/:id', auth, async (req, res, next) => {
       } catch (error) {
         res.status(400).send(error)
       }
-    // const expenseById = await getById(req.params.id).first();
-    // expenseById ? res.json(expenseById) : next();
 });
 
-// router.get('/users/:id', verify, async (req, res, next) => {
-//     const expensesByUser = await knex('expenses').where('user_id', req.params.id);
-//     expensesByUser.length > 0 ? res.json(expensesByUser) : next();
-// });
 
 router.post('/expenses', auth, async (req, res) => {
     const expense = new Expense(req.body)
@@ -38,11 +32,6 @@ router.post('/expenses', auth, async (req, res) => {
     } catch (error) {
         res.status(400).send(error)
     }
-    // const newId = await knex('expenses').insert({
-    //     amount: req.body.amount,
-    //     user_id: req.user.id
-    // });
-    // res.json(await getById(newId).first());
 });
 
 router.put('/expenses/:id', auth, async (req, res, next) => {
@@ -59,8 +48,6 @@ router.put('/expenses/:id', auth, async (req, res, next) => {
     } catch (error) {
         res.status(500).send(error)
     }
-    // const updatedExpense = await getById(req.params.id).update(req.body);
-    // updatedExpense === 1 ? res.json(await getById(req.params.id).first()) : next();
 });
 
 router.delete('/expenses/:id', auth, async (req, res, next) => {
@@ -72,12 +59,6 @@ router.delete('/expenses/:id', auth, async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error)
     }
-    // const deletedExpense = await getById(req.params.id).del();
-    // deletedExpense === 1 ? res.json(deletedExpense) : next();
 });
-
-// function getById(id) {
-//     return knex('expenses').where('id', id);
-// }
 
 module.exports = router;
